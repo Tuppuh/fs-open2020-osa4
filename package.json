@@ -1,0 +1,30 @@
+{
+  "name": "blogilista",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tuppuh/fs-open2020-osa4.git"
+  },
+  "author": "Tuomo Ojaluoma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tuppuh/fs-open2020-osa4/issues"
+  },
+  "homepage": "https://github.com/Tuppuh/fs-open2020-osa4#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
