@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -20,13 +20,17 @@
   "homepage": "https://github.com/Tuppuh/fs-open2020-osa4#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
-    "mongoose": "^5.10.9"
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^5.10.9",
+    "save-dev": "0.0.1-security"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
     "jest": "^26.5.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
   },
   "jest": {
     "testEnvironment": "node"
