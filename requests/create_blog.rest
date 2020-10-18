@@ -1,9 +1,9 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikxvc2VyNCIsImlkIjoiNWY4Yzk3MTJjZmU2NzgxYTdjNWNhOTZlIiwiaWF0IjoxNjAzMDQ5MzkyfQ.tF0KWZcYRrVNSnJkt-wQSHum_Lbrh0nr4AKWC38vxwY
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikxvc2VyMyIsImlkIjoiNWY4Yzc0ZDJjNjJkYmE0MmQ0MjA3NmY0IiwiaWF0IjoxNjAzMDQ3Nzg2fQ.WwY9KBNkhpd4NrBNzDx6pYiBFNY0o6tAUIiHkdS8_c0
 
 {
-    "title": "Loserblog4",
+    "title": "Loserblog5",
     "url": "www.jeejee.com",
     "likes": 9
 }

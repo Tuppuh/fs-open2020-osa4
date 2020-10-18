@@ -107,12 +107,21 @@ describe('when there is initially one user at db', () => {
 
 describe('basic blog api tests', () => {
     beforeEach(async () => {
+        await User.deleteMany({})
+  
+        const passwordHash = await bcrypt.hash('sekret', 10)
+        const user = new User({ username: 'root', passwordHash })
+    
+        await user.save()
+
         await Blog.deleteMany({})
     
         let blogObject = new Blog(helper.initialBlogs[0])
+        blogObject.user = user.id
         await blogObject.save()
     
         blogObject = new Blog(helper.initialBlogs[1])
+        blogObject.user = user.id
         await blogObject.save()
     })
 
@@ -138,6 +147,17 @@ describe('basic blog api tests', () => {
     })
 
     test('a valid blog can be added', async () => {
+
+        login = {
+            username: "root",
+            password: "sekret"
+        }
+        const auth = await api
+            .post('/api/login')
+            .send(login)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
         const newBlog = {
             title: 'This is a title of valid blog',
             author: 'Valid Author',
@@ -145,8 +165,10 @@ describe('basic blog api tests', () => {
             likes: 7
         }
 
+        const auth_str = `bearer ${auth.body.token}`
         await api
             .post('/api/blogs')
+            .set('Authorization', auth_str)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -167,8 +189,20 @@ describe('basic blog api tests', () => {
             url: 'www.valid-url.com',
         }
 
+        login = {
+            username: "root",
+            password: "sekret"
+        }
+        const auth = await api
+            .post('/api/login')
+            .send(login)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        const auth_str = `bearer ${auth.body.token}`
         const resultBlog = await api
             .post('/api/blogs')
+            .set('Authorization', auth_str)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -177,6 +211,18 @@ describe('basic blog api tests', () => {
     })
 
     test('blog without title and url is not added', async () => {
+        login = {
+            username: "root",
+            password: "sekret"
+        }
+        const auth = await api
+            .post('/api/login')
+            .send(login)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+            
+        const auth_str = `bearer ${auth.body.token}`
+
         const newBlog = {
             author: 'Valid Author',
             url: 'www.valid-url.com',
@@ -189,11 +235,13 @@ describe('basic blog api tests', () => {
     
         await api
         .post('/api/blogs')
+        .set('Authorization', auth_str)
         .send(newBlog)
         .expect(400)
         
         await api
         .post('/api/blogs')
+        .set('Authorization', auth_str)
         .send(newBlog2)
         .expect(400)
     
@@ -203,11 +251,24 @@ describe('basic blog api tests', () => {
     })
 
     test('blog can be deleted', async () => {
+        login = {
+            username: "root",
+            password: "sekret"
+        }
+        const auth = await api
+            .post('/api/login')
+            .send(login)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+            
+        const auth_str = `bearer ${auth.body.token}`
+
         const blogsAtStart = await helper.blogsInDb()
         const blogToDelete = blogsAtStart[0]
 
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
+            .set('Authorization', auth_str)
             .expect(204)
         
         const blogsAtEnd = await helper.blogsInDb()
