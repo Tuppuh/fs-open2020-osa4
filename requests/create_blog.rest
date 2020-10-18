@@ -1,8 +1,9 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikxvc2VyNCIsImlkIjoiNWY4Yzk3MTJjZmU2NzgxYTdjNWNhOTZlIiwiaWF0IjoxNjAzMDQ5MzkyfQ.tF0KWZcYRrVNSnJkt-wQSHum_Lbrh0nr4AKWC38vxwY
 
 {
-    "title": "Jahas4",
-    "url": "adfadfaddfadf",
-    "likes": 5
+    "title": "Loserblog4",
+    "url": "www.jeejee.com",
+    "likes": 9
 }
