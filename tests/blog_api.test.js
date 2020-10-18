@@ -182,6 +182,25 @@ describe('basic blog api tests', () => {
         )
     })
 
+    test('adding blog without token returns 401', async () => {
+
+        const newBlog = {
+            title: 'This is a title of valid blog',
+            author: 'Valid Author',
+            url: 'www.valid-url.com',
+            likes: 7
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(401)
+            .expect('Content-Type', /application\/json/)
+        
+        const blogsAtEnd = await helper.blogsInDb()
+        expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+    })
+
     test('default likes is 0', async () => {
         const newBlog = {
             title: 'This is a title of valid blog',
